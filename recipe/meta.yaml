@@ -12,7 +12,7 @@ source:
   sha256: 0851e91f826424f20fd4a58348ffe161d147bdc091d24d676e14d4cd6180e13c
 
 build:
-  number: 2
+  number: 3
   rpaths:
     - lib/R/lib/
     - lib/
@@ -20,21 +20,21 @@ build:
     - '*/R.dll'        # [win]
     - '*/Rblas.dll'    # [win]
     - '*/Rlapack.dll'  # [win]
-  skip: true  # [ppc64le]
+  skip: true  # [ppc64le]  # pandoc not available
 
 requirements:
   build:
     - cross-r-base {{ r_base }}    # [build_platform != target_platform]
+    - r-matrix >=1.2               # [build_platform != target_platform]
+    - r-rcpp                       # [build_platform != target_platform]
+    - r-rcpparmadillo              # [build_platform != target_platform]
     - r-ggplot2 >=1.0.1            # [build_platform != target_platform]
     - r-glmnet                     # [build_platform != target_platform]
     - r-iterpc >=0.3               # [build_platform != target_platform]
     - r-knitr                      # [build_platform != target_platform]
-    - r-matrix >=1.2               # [build_platform != target_platform]
     - r-numderiv                   # [build_platform != target_platform]
     - r-plotly >=3.6.0             # [build_platform != target_platform]
     - r-quantreg >=5.01            # [build_platform != target_platform]
-    - r-rcpp                       # [build_platform != target_platform]
-    - r-rcpparmadillo              # [build_platform != target_platform]
     - r-rjson                      # [build_platform != target_platform]
     - r-rmarkdown                  # [build_platform != target_platform]
     - r-robustbase >=0.92_6        # [build_platform != target_platform]
@@ -44,6 +44,7 @@ requirements:
     - {{ stdlib('m2w64_c') }}      # [win]
     - {{ compiler('cxx') }}        # [not win]
     - {{ compiler('m2w64_cxx') }}  # [win]
+    - {{ compiler('fortran') }}    # [osx and arm64]
     - {{ posix }}filesystem        # [win]
     - {{ posix }}make
     - {{ posix }}sed               # [win]
@@ -53,16 +54,16 @@ requirements:
     - llvm-openmp                  # [osx]
   host:
     - r-base
+    - r-matrix >=1.2
+    - r-rcpp
+    - r-rcpparmadillo
     - r-ggplot2 >=1.0.1
     - r-glmnet
     - r-iterpc >=0.3
     - r-knitr
-    - r-matrix >=1.2
     - r-numderiv
     - r-plotly >=3.6.0
     - r-quantreg >=5.01
-    - r-rcpp
-    - r-rcpparmadillo
     - r-rjson
     - r-rmarkdown
     - r-robustbase >=0.92_6
@@ -72,16 +73,16 @@ requirements:
     - llvm-openmp                  # [osx]
   run:
     - r-base
+    - r-matrix >=1.2
+    - r-rcpp
+    - r-rcpparmadillo
     - r-ggplot2 >=1.0.1
     - r-glmnet
     - r-iterpc >=0.3
     - r-knitr
-    - r-matrix >=1.2
     - r-numderiv
     - r-plotly >=3.6.0
     - r-quantreg >=5.01
-    - r-rcpp
-    - r-rcpparmadillo
     - r-rjson
     - r-rmarkdown
     - r-robustbase >=0.92_6
